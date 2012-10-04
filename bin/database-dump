@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PROJ_PATH=$(cd $(dirname $0)/..; pwd); source $PROJ_PATH/bin/env
+
+cd $PROJ_PATH
+
+mkdir -p var/db
+mv -f var/db/database.sql var/db/database.sql.bak || echo ""
+
+$PLATFORM_PATH/pg_dump -hlocalhost -U${DB_USER} ${DB_NAME} > var/db/database.sql

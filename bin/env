@@ -1,0 +1,15 @@
+export PROJECT=web_template
+export DB_NAME=${PROJECT}
+export DB_USER=${PROJECT}
+export DB_PASS=${DB_USER}
+export PROJ_PATH=$(cd $(dirname $0)/..; pwd)
+export PLATFORM=$(uname -s -m | tr '[A-Z] ' '[a-z]-')
+export PLATFORM_PATH=$PROJ_PATH/bin/$PLATFORM
+export PATH=$PLATFORM_PATH:$PROJ_PATH/bin:$PATH
+
+if [ $(uname) == "Darwin" ]; then
+  if [ $(sysctl -n kern.sysv.shmall) -lt 393216 ]; then
+    echo "Need to increase shared memory parameter!"
+    sudo sysctl -w kern.sysv.shmall=393216 kern.sysv.shmmax=1610612736
+  fi
+fi

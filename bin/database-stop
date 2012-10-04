@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PROJ_PATH=$(cd $(dirname $0)/..; pwd); source $PROJ_PATH/bin/env
+
+cd $PROJ_PATH
+
+$PLATFORM_PATH/pg_ctl -D var/postgres -l log/postgres.log stop

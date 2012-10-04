@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PROJ_PATH=$(cd $(dirname $0)/..; pwd); source $PROJ_PATH/bin/env
+
+cd $PROJ_PATH
+
+echo "create user ${DB_USER} with password '${DB_PASS}'; create database ${DB_NAME}; alter database ${DB_NAME} owner to ${DB_USER};" | $PLATFORM_PATH/psql -d postgres
+echo "create extension hstore;" | $PLATFORM_PATH/psql -d ${DB_NAME}
+$PLATFORM_PATH/psql -h localhost -d ${DB_NAME} -U ${DB_USER} -f var/db/database.sql
+

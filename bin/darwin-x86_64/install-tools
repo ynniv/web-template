@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $(which brew) == "" ]; then
+  echo "installing homebrew"
+  /usr/bin/ruby -e "$(/usr/bin/curl -fksSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
+fi
+
+brew install postgresql

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PROJ_PATH=$(cd $(dirname $0)/..; pwd); source $PROJ_PATH/bin/env
+
+cd $PROJ_PATH
+
+$PLATFORM_PATH/pg_ctl -D var/postgres initdb
+
+./bin/database-start
+
+echo "pausing for db to start..."
+sleep 3
+
+$PROJ_PATH/bin/database-restore
+
+./bin/database-stop
